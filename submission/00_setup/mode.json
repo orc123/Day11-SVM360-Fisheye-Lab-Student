@@ -7,7 +7,9 @@
   },
   "self": "Đông",
   "slice": "B3-dense",
-  "degrade": [],
+  "degrade": [
+    "k12"
+  ],
   "current_slice": "B3-dense",
   "support_prefill": false,
   "support_slice": "",
