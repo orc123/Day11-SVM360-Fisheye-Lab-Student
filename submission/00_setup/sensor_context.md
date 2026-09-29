@@ -1,6 +1,7 @@
 # Sensor context
 
-- TODO — Rig: mô tả ngắn xe/camera gắn ở đâu theo hiểu biết của bạn từ ảnh (ADASIND không kèm tài liệu rig chi
-  tiết, ghi theo quan sát).
-- TODO — `ego_body` nhìn thấy ở đâu trong frame (góc capo, gương, tay lái...).
-- TODO — Vòng kính (lens circle) nằm ở vị trí nào trong ảnh, chiếm khoảng bao nhiêu phần khung hình.
+Quan sát trên ba frame slice **B3-dense** (`adasind_145860.jpg`, `adasind_167700.jpg`, `adasind_199770.jpg`), ảnh dọc 1080×1920. Mọi mô tả rig dưới đây là **suy luận từ ảnh**; ADASIND không kèm tài liệu rig, calibration hay intrinsics.
+
+- Rig: dữ liệu từ **một camera fisheye duy nhất**, hướng về phía trước theo chiều di chuyển, ảnh quay dọc. Vòng kính tròn có viền đen, có vệt lóa/bụi trên mặt kính, gợi ý một ống kính fisheye gắn ngoài (kiểu gắn lên camera điện thoại) chứ không phải camera SVM tích hợp. Ở mép trái có cánh tay áo caro, bàn tay cầm tay nắm, và ở đáy ảnh có chân/dép. Vì vậy camera có vẻ gắn ở tầm ngực người trên một **xe hai bánh**, nhìn qua vai/tay lái về phía trước. Đây là giả thuyết, chưa xác minh. Giới hạn: chỉ có một góc nhìn, nên không đại diện cho bốn camera front/rear/left/right của SVM. Không có timestamp đồng bộ hay calibration để ghép vật qua seam.
+- `ego_body` nhìn thấy ở đâu trong frame: ở góc **dưới-trái** của cả ba frame. Gồm tay áo caro và bàn tay trên tay nắm (khoảng x < 200, y ≈ 1050–1650), thân/chân người lái kéo xuống đáy vòng kính, và ở `145860` còn thấy chân và dép ở đáy (≈ y 1550–1790). Vùng này đổi hình dạng giữa các frame vì người ngồi cử động, nên phải vẽ polygon `ego_body` riêng cho từng frame, không sao chép giữa các frame. Không thấy capo hay gương ô tô.
+- Vòng kính (lens circle): tâm hơi lệch trái và nằm dưới giữa ảnh (cx ≈ 554–628, cy ≈ 984–1026), bán kính r ≈ 805–834 px (số đo từ `assets/frames.csv`). Đường kính (~1610–1670 px) **lớn hơn bề rộng ảnh** (1080 px), nên vòng tròn bị khung hình cắt ở hai cạnh trái và phải. Phần vành đen `lens_border` chỉ hiện rõ ở trên (y < ~170–190) và dưới (y > ~1800–1860). Phần bên trong vòng kính chiếm khoảng **77–80 %** diện tích khung hình. Méo mạnh nhất ở rìa vòng tròn, nơi các vật như xe ba bánh ở mép trái/phải bị uốn cong và cắt (`truncated`). Vì vậy box phải bám hình dạng trên ảnh gốc (R02).

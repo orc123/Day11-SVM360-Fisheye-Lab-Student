@@ -1,1 +1,2 @@
 id,date,question,decision,rationale,status
+D01,2026-09-29,"Lệnh mode chia tự động slice B4-center, nhưng bài làm dùng slice nào?","Làm slice B3-dense; sửa assignments trong 00_setup/mode.json từ B4-center thành B3-dense cho khớp trường slice","Học viên chọn làm B3-dense (3 frame 145860, 167700, 199770) và đã chạy python3 lab11.py cvat B3-dense trước P2; toàn bộ task CVAT, prefill và bài nộp r1_craft dùng B3-dense. Sửa tay mode.json chỉ để bản ghi phân công không mâu thuẫn với slice thực làm",decided

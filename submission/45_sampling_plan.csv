@@ -1,9 +1,9 @@
 camera_id,slice_type,frames,risk,rationale
-front,normal,,TODO,TODO
-front,hard,,TODO,TODO
-rear,normal,,TODO,TODO
-rear,hard,,TODO,TODO
-left,normal,,TODO,TODO
-left,hard,,TODO,TODO
-right,normal,,TODO,TODO
-right,hard,,TODO,TODO
+front,normal,20,"Baseline đường thông thường: xe/người ở giữa ảnh, ít che","Đủ để đo mức đúng nền của camera nhiều object nhất; không cần nhiều vì ca dễ lặp lại. Giả định 50.000 frame chia ~đều 12.500/camera; chọn phân tầng theo thời gian/tuyến để không lấy frame liền kề"
+front,hard,34,"Đông người và xe hai bánh, người dắt xe, ngược sáng/lóa, vật bị cắt ở rìa vòng kính","Ưu tiên cao nhất vì front có mật độ object lớn và lỗi class/rider (R03) hay xảy ra ở cảnh đông; P0 đã thấy lóa và cảnh đông trên frame một camera (B3-dense) – sẽ bổ sung bằng số lỗi sau P4"
+rear,normal,20,"Lùi/đỗ bình thường: bãi trống, vạch ô đỗ rõ","Baseline cho use case đỗ xe; cần để so với hard slice cùng camera"
+rear,hard,30,"Vật thấp sát cản sau, vạch ô đỗ mờ/lẫn vạch lối xe, thân xe ego che, thiếu sáng/đèn lùi","Rear phục vụ parking nên nhầm parking_line vs vạch lối xe và vật gần bị méo/che là rủi ro chính; ít frame hơn front vì xe ít khi lùi"
+left,normal,16,"Lề đường/làn bên cạnh bình thường","Baseline tối thiểu cho camera bên; ít object hơn front"
+left,hard,32,"Seam góc trước-trái và sau-trái, xe máy vượt sát, vật dài (bus/truck) trải qua hai camera, truncated ở rìa","Camera bên có hai seam nên là nơi sinh ca một vật – hai box và cắt ở rìa; cần đủ ca để viết policy seam trước khi dùng cho gold"
+right,normal,16,"Lề đường/làn bên cạnh bình thường","Đối xứng với left để so hai bên với cùng cỡ mẫu"
+right,hard,32,"Seam góc trước-phải và sau-phải, curb/vỉa hè sát xe, người đi bộ sát thân xe, truncated ở rìa","Đối xứng với left; bên phía vỉa hè có thêm người đi bộ và curb sát xe. Sau P4 xem lại có cần lệch left/right theo chiều lưu thông không"
