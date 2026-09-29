@@ -8,7 +8,8 @@
   "self": "Đông",
   "slice": "B3-dense",
   "degrade": [
-    "k12"
+    "k12",
+    "rework"
   ],
   "current_slice": "B3-dense",
   "support_prefill": false,
